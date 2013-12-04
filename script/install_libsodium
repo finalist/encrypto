@@ -1,0 +1,10 @@
+#!/bin/sh
+if [ ! -f /usr/local/lib/libsodium.a ];
+then
+  curl -o /tmp/sodium.tar.gz https://download.libsodium.org/libsodium/releases/old/libsodium-0.2.tar.gz
+  cd /tmp
+  tar vfzx sodium.tar.gz
+  cd libsodium-0.2
+  ./configure
+  make && make check && make install
+fi

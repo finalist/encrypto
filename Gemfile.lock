@@ -1,0 +1,53 @@
+PATH
+  remote: .
+  specs:
+    encrypto (0.0.1)
+      attr_encrypted (~> 1.3.0)
+      rbnacl (~> 1.1.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    attr_encrypted (1.3.0)
+      encryptor (>= 1.3.0)
+    coderay (1.1.0)
+    diff-lcs (1.2.5)
+    docile (1.1.1)
+    encryptor (1.3.0)
+    ffi (1.9.3)
+    method_source (0.8.2)
+    multi_json (1.8.2)
+    pry (0.9.12.4)
+      coderay (~> 1.0)
+      method_source (~> 0.8)
+      slop (~> 3.4)
+    pry-nav (0.2.3)
+      pry (~> 0.9.10)
+    rbnacl (1.1.0)
+      ffi
+    rspec (2.14.1)
+      rspec-core (~> 2.14.0)
+      rspec-expectations (~> 2.14.0)
+      rspec-mocks (~> 2.14.0)
+    rspec-core (2.14.7)
+    rspec-expectations (2.14.4)
+      diff-lcs (>= 1.1.3, < 2.0)
+    rspec-mocks (2.14.4)
+    simplecov (0.8.2)
+      docile (~> 1.1.0)
+      multi_json
+      simplecov-html (~> 0.8.0)
+    simplecov-html (0.8.0)
+    slop (3.4.7)
+    spec_coverage (0.0.5)
+      rspec (~> 2.0)
+      simplecov
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  encrypto!
+  pry-nav (~> 0.2.3)
+  rspec (~> 2.14.1)
+  spec_coverage (~> 0.0.5)
