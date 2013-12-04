@@ -2,12 +2,16 @@ module Encrypto
   module Keys
 
     def self.generate_keypair
-      private_key = Crypto::PrivateKey.generate
-      [private_key.public_key.to_s(:hex), private_key]
+      private_key = RbNaCl::PrivateKey.generate
+      [private_key.public_key, private_key]
     end
 
-    def self.hex_public_key(value)
-      Crypto::PublicKey.new(value, :hex)
+    def self.to_bytes(key)
+      key.to_s
+    end
+
+    def self.public_key_from_bytes(bytes)
+      RbNaCl::PublicKey.new(bytes)
     end
 
   end
