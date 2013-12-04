@@ -7,21 +7,21 @@ module Encrypto
       let(:passphrase) { 'password' }
 
       it 'hashes the secret key' do
-        Crypto::Hash.should_receive(:sha256).with(passphrase)
-        Crypto::RandomNonceBox.stub(:from_secret_key)
+        RbNaCl::Hash.should_receive(:sha256).with(passphrase)
+        RbNaCl::RandomNonceBox.stub(:from_secret_key)
         Encrypto::Box.from_passphrase(passphrase)
       end
 
       it 'creates a random nonce box based on the hashed secret key' do
-        Crypto::Hash.stub(:sha256 => "sha")
-        Crypto::RandomNonceBox.should_receive(:from_secret_key).with("sha")
+        RbNaCl::Hash.stub(:sha256 => "sha")
+        RbNaCl::RandomNonceBox.should_receive(:from_secret_key).with("sha")
         Encrypto::Box.from_passphrase(passphrase)
       end
 
       it 'initializes with a random nonce box' do
         box = double("box")
-        Crypto::Hash.stub(:sha256 => "sha")
-        Crypto::RandomNonceBox.stub(:from_secret_key => box)
+        RbNaCl::Hash.stub(:sha256 => "sha")
+        RbNaCl::RandomNonceBox.stub(:from_secret_key => box)
         Encrypto::Box.should_receive(:new).with(box)
         Encrypto::Box.from_passphrase(passphrase)
       end
@@ -32,13 +32,13 @@ module Encrypto
       let(:private_key) { double("private key") }
 
       it "creates a random nonce box based on the keypair" do
-        Crypto::RandomNonceBox.should_receive(:from_keypair).with(public_key, private_key)
+        RbNaCl::RandomNonceBox.should_receive(:from_keypair).with(public_key, private_key)
         Encrypto::Box.from_keypair(public_key, private_key)
       end
 
       it "initializes with a random nonce box" do
         box = double("box")
-        Crypto::RandomNonceBox.stub(:from_keypair => box)
+        RbNaCl::RandomNonceBox.stub(:from_keypair => box)
         Encrypto::Box.should_receive(:new).with(box)
         Encrypto::Box.from_keypair(public_key, private_key)
       end

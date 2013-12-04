@@ -17,14 +17,11 @@ module Encrypto
   end
 
   def self.encrypt_with_keypair(value, public_key, signing_private_key)
-    hex_public_key = Keys.hex_public_key(public_key)
-    keypair_box(hex_public_key, signing_private_key).box(value)
+    keypair_box(public_key, signing_private_key).box(value)
   end
 
-  def self.decrypt_with_keypair(cipher_text, hex_public_key, private_key)
-    public_key = Keys.hex_public_key(hex_public_key)
-    box = Box.from_keypair(public_key, private_key)
-    box.open(cipher_text)
+  def self.decrypt_with_keypair(cipher_text, signing_public_key, private_key)
+    keypair_box(signing_public_key, private_key).open(cipher_text)
   end
 
   private
