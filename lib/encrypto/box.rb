@@ -10,7 +10,7 @@ module Encrypto
     end
 
     def open(cipher_text)
-      @nacl_box.open(cipher_text)
+      @nacl_box.open(cipher_text.clone)
     end
 
     def self.from_passphrase(passphrase)

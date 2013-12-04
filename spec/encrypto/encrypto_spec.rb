@@ -54,17 +54,12 @@ module Encrypto
     describe '.encrypt_with_keypair' do
       it 'boxes the value in a keypair box' do
         value = double("value")
-        public_key = double("public")
-        hex_public_key = double("hex_public_key")
+        public_key = double("public_key")
         signing_private_key = double("signing_private_key")
         box = double("box")
 
-        Encrypto::Keys.should_receive(:hex_public_key).
-             with(public_key).
-             and_return(hex_public_key)
-
         Encrypto::Box.should_receive(:from_keypair).
-                    with(hex_public_key, signing_private_key).
+                    with(public_key, signing_private_key).
                     and_return(box)
 
         box.should_receive(:box).
@@ -76,33 +71,23 @@ module Encrypto
 
     describe ".decrypt_with_keypair" do
       let(:cipher_text)    { double("cipher text") }
-      let(:hex_public_key) { double("hex public key") }
       let(:public_key)     { double("public key") }
       let(:private_key)    { double("private key") }
-
-      it "creates a public key" do
-        Encrypto::Keys.should_receive(:hex_public_key).with(hex_public_key)
-        Encrypto::Box.stub(from_keypair: double(open: nil))
-
-        subject.decrypt_with_keypair(cipher_text, hex_public_key, private_key)
-      end
 
       it "decrypts the cipher text with the keypair"  do
         box = double
 
-        Encrypto::Keys.stub(hex_public_key: public_key)
         Encrypto::Box.should_receive(:from_keypair).with(public_key, private_key).and_return(box)
         box.should_receive(:open).with(cipher_text)
 
-        subject.decrypt_with_keypair(cipher_text, hex_public_key, private_key)
+        subject.decrypt_with_keypair(cipher_text, public_key, private_key)
       end
 
       it "returns the decrypted cipher text" do
         box = double(open: "decrypted value")
-        Encrypto::Keys.stub(hex_public_key: public_key)
         Encrypto::Box.stub(from_keypair: box)
 
-        subject.decrypt_with_keypair(cipher_text, hex_public_key, private_key).should eql "decrypted value"
+        subject.decrypt_with_keypair(cipher_text, public_key, private_key).should eql "decrypted value"
       end
     end
   end

@@ -49,7 +49,7 @@ module Encrypto
         value = double("value")
 
         some_box = double("box")
-        some_box.should_receive(:box).with(value, :hex)
+        some_box.should_receive(:box).with(value)
 
         box = Encrypto::Box.new(some_box)
         box.box(value)
@@ -59,9 +59,10 @@ module Encrypto
     describe "#open" do
       it "opens the cipher text" do
         cipher_text = double("cipher text")
+        cipher_text.stub(:clone => cipher_text)
 
         some_box = double("box")
-        some_box.should_receive(:open).with(cipher_text, :hex)
+        some_box.should_receive(:open).with(cipher_text)
 
         box = Encrypto::Box.new(some_box)
         box.open(cipher_text)
