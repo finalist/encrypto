@@ -16,25 +16,27 @@ module Encrypto
         private_key.should be_a RbNaCl::PrivateKey
       end
 
-      it 'returns a publick key' do
+      it 'returns a public key' do
         public_key, private_key = Keys.generate_keypair
         public_key.should be_a RbNaCl::PublicKey
       end
     end
 
     describe '.to_bytes' do
-
       let(:key) { 'x'*32 }
 
       it 'returns the bytes of the key' do
-        private_key = RbNaCl::PrivateKey.new(key)
-        Keys.to_bytes(private_key).should eql key
+        newkey = key.b
+        private_key = RbNaCl::PrivateKey.new(newkey)
+        Keys.to_bytes(private_key).should eql newkey
       end
     end
 
     describe '.public_key_from_bytes' do
+      let(:key) { 'x'*32 }
+
       it 'returns a public key' do
-        public_key = Keys.public_key_from_bytes('x'*32)
+        public_key = Keys.public_key_from_bytes(key.b)
         public_key.should be_a RbNaCl::PublicKey
       end
     end

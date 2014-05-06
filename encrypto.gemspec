@@ -14,7 +14,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.homepage      = 'http://github.com/finalist/encrypto'
 
-  gem.add_dependency             "rbnacl",         "~> 2.0.0"
+  gem.add_dependency             "rbnacl",         "~> 3.0.0"
   gem.add_dependency             "attr_encrypted", "~> 1.3.1"
 
   gem.add_development_dependency "pry-nav",        "~> 0.2.3"

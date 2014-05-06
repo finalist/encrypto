@@ -7,7 +7,7 @@ module Encrypto
     end
 
     def self.to_bytes(key)
-      key.to_s
+      key.to_bytes
     end
 
     def self.public_key_from_bytes(bytes)
