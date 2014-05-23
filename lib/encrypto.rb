@@ -1,3 +1,4 @@
+require "rbnacl/libsodium"
 require "rbnacl"
 require "attr_encrypted"
 require "encrypto/version"
